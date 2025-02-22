@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-const { USE } = require('sequelize/lib/index-hints');
 const { User } = require('../models')()
 
 dotenv.config()
@@ -57,10 +56,7 @@ const update = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'Error al encontrar el usuario' });
         }
-        const userUpdated = await User.update(req.body, {
-            where: { userId: userId },
-        })
-        return res.send({ message: 'Usuario actualizado existosamente', data: userUpdated });
+        return res.send({ message: 'Usuario actualizado existosamente', data: req.body });
     } catch (error) {
         return res.status(500).send({ message: 'Error al crear el usuario' });
     }
