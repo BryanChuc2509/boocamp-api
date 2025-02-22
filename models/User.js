@@ -21,6 +21,14 @@ const UserOf = (sequelize, DataTypes) => {
         password: {
             type: DataTypes.STRING,
             field: 'CONTRASENIA'
-        },
-    })
+        }
+    },
+        {
+            tableName: 'USUARIOS',
+            timestamps: false,
+        }
+    );
+    return User;
 };
+
+module.exports = UserOf;
