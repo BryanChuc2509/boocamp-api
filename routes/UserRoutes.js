@@ -5,11 +5,17 @@ const userController = require('../controllers/UsersController');
 router
     .route('/all')
     .get(userController.getUsers);
-    
-// router
-//     .route('/create')
-//     .post(userController.createUser)
-// router
-//     .route('/update/:userId')
-//     .put(userController.updateUser)
+router
+    .route('/:userId')
+    .get(userController.getUserById)
+router
+    .route('/create')
+    .post(userController.create)
+router
+    .route('/update/:userId')
+    .put(userController.update)
+router
+    .route('/delete/:userId')
+    .delete(userController.deleteUser)
+
 module.exports = router;
