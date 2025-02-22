@@ -1,0 +1,8 @@
+# History
+.history
+
+# Dependencies
+node_modules
+
+# Env variables
+.env
