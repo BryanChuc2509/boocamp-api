@@ -12,12 +12,12 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(morgan);
+app.use(morgan('dev'));
 app.use(cors({origin: '*'}));
 app.use(express.json());
 
 app.get('/', (_req, res)=>{
-    return res.send({
+    return res.json({
         app: 'ContabilidaApi',
         version: projectInfo.version || '1.0.0',
         description: projectInfo.description || 'API para el manejo de la contabilidad de una empresa'
