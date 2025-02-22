@@ -1,8 +1,8 @@
 const UserOf = (sequelize, DataTypes) => {
-    const User = sequelize.default('User', {
+    const User = sequelize.define('User', {
         userId: {
             type: DataTypes.INTEGER,
-            primary: true,
+            primaryKey: true,
             autoIncrement: true,
             field: 'ID',
         },
