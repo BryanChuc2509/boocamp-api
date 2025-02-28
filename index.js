@@ -4,14 +4,16 @@ const dotenv = require('dotenv');
 const morgan  = require('morgan');
 const extraRoutes = require ('./routes');
 const express = require('express')
-// const auth = require('./middlewares/auth');
+const auth = require('./middlewares/auth');
 const projectInfo = require('./package.json');
+
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(auth);
 app.use(morgan('dev'));
 app.use(cors({origin: '*'}));
 app.use(express.json());
