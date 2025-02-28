@@ -15,7 +15,7 @@ router
     .router('/update/:clientId')
     .put(clientController.update);
 router
-    .router('delete/:clientId')
+    .router('/delete/:clientId')
     .delete(clientController.deleteClient);
 
 module.exports = router;
