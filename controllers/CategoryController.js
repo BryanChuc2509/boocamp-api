@@ -10,7 +10,7 @@ const getCategories = async (_req, res) => {
     }
 }
 
-const getAccountById = async (req, res) => {
+const getCategoryById = async (req, res) => {
     try {
         const { categoryId } = req.params;
         const category = await Category.findOne({
@@ -80,7 +80,7 @@ const deleteCategory = async (req, res) => {
 
 module.exports = {
     getCategories,
-    getAccountById,
+    getCategoryById,
     create,
     update,
     deleteCategory
