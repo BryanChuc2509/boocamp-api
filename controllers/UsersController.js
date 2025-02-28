@@ -88,7 +88,7 @@ const update = async (req, res) => {
     try {
         const { userId } = req.params;
 
-        const user = await User.findOne({ where: { userId: userId } })
+        const user = await getUserById(userId);
         if (!user) {
             return res.status(404).json({ message: 'Error al encontrar el usuario' });
         }
@@ -101,7 +101,7 @@ const update = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const { userId } = req.params;
-        const user = await User.findOne({ where: { userId: userId } })
+        const user = await getUserById(userId);
 
         if (!user) {
             return res.status(404).json({ message: 'Error al encontrar el usuario' });
