@@ -40,7 +40,17 @@ const create = async (req, res) => {
 
 const update = async(req, res) => {
     try{
-
+        const {clientId} = req.params;
+        const client = await getClientById(clientId);
+        if(!client){
+            return res.status(404).send({message: 'Client not found'});
+        }
+        const updateClient = await Client.update(req.body, {
+            where: {
+                clientId: clientId,
+            }
+        })
+        return res.send({message: 'Client updated', data: updateClient})
     } catch(error) {
         console.error(error);
         return res.status(500).send({message: 'Unexpected error'});
@@ -49,7 +59,17 @@ const update = async(req, res) => {
 
 const deleteClient = async(req,res) => {
     try {
-
+        const {clientId} = req.params;
+        const client = await getClientById(clientId);
+        if(!client){
+            return res.status(404).send({message: 'Client not found'})
+        }
+        await Client.destroy({
+            where: {
+                clientId: clientId,
+            }
+        });
+        return res.send({message: 'Client deleted', data: client});
     } catch(error) {
         console.error(error);
         return res.status(500).send({message: 'Unexpected error'});
