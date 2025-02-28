@@ -24,7 +24,7 @@ const AccountOf = (sequelize, DataTypes) => {
             timestamps: false,
         }
     );
-    return Category;
+    return Account;
 }
 
 module.exports = AccountOf;
