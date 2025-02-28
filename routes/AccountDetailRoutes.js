@@ -3,19 +3,19 @@ const AccountDetailController = require('../controllers/AccountDetailController'
 const express = require('express');
 
 router
-    .router('/all')
+    .route('/all')
     .get(AccountDetailController.getAccounts);
 router
-    .router('/:accountId')
+    .route('/:accountId')
     .get(AccountDetailController.getAccountById);
 router
-    .router('/create')
+    .route('/create')
     .post(AccountDetailController.create);
 router
-    .router('/update/:accountId')
+    .route('/update/:accountId')
     .put(AccountDetailController.update);
 router
-    .router('/delete/:accountId')
+    .route('/delete/:accountId')
     .delete(AccountDetailController.deleteAccount);
 
 module.exports = router;

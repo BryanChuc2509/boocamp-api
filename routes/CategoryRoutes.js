@@ -3,19 +3,19 @@ const categoryController = require('../controllers/CategoryController');
 const express = require('express');
 
 router
-    .router('/all')
+    .route('/all')
     .get(categoryController.getCategories);
 router
-    .router('/:categoryId')
+    .route('/:categoryId')
     .get(categoryController.getCategoryById);
 router
-    .router('/create')
+    .route('/create')
     .post(categoryController.create);
 router
-    .router('/update/:categoryId')
+    .route('/update/:categoryId')
     .put(categoryController.update);
 router
-    .router('/delete/:categoryId')
+    .route('/delete/:categoryId')
     .delete(categoryController.deleteCategory);
 
 module.exports = router;
