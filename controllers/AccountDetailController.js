@@ -1,5 +1,15 @@
 const { AccountDetail } = require('../models');
 
+const getAccounts = async (_req, res) => {
+    try {
+        const accounts = await AccountDetail.findAll();
+        return res.send(accounts);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({ message: 'Unexpected error' });
+    }
+}
+
 const getAccountById = async (req, res) => {
     try {
         const { accountId } = req.params;
@@ -69,6 +79,7 @@ const deleteAccount = async (req, res) => {
 }
 
 module.exports = {
+    getAccounts,
     getAccountById,
     create,
     update,
