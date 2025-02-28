@@ -6,6 +6,12 @@ router
     .route('/all')
     .get(usersController.getUsers);
 router
+    .route('/login')
+    .post(usersController.login);
+router
+    .route('/register')
+    .post(usersController.register);
+router
     .route('/:userId')
     .get(usersController.getUserById)
 router

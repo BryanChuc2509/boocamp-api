@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-const { where } = require('sequelize');
 const { User } = require('../models')()
 
 dotenv.config()
@@ -18,8 +17,34 @@ const login = async (req, res) => {
     if (!user) {
         return res.status(401).send({ message: 'Correo y/o contraseña incorrectas' });
     }
-    const token = jwt.sing(user.dataValues, secret)
+    const token = jwt.sing(user.dataValues, secret, {
+        expiresIn: 60 * 60 * 7,  // 7 dias
+    });
+    const { password: _, ...userData } = user.dataValues;
+    return res.send({ ...userData, token });
 }
+
+const register = async (req, res) => {
+    try {
+        const requiredParams = ['name', 'lastName', 'email', 'password'];
+        const missingParams = requiredParams
+            .filter((param) => {
+                return !req.body[param];
+            })
+            .map((param) => {
+                return { [param]: 'Required' };
+            });
+        if (missingParams.length > 0) {
+            return res.status(400).send({ message: 'Missing required parameters', details: missingParams });
+        }
+        const user = await User.create(req.body);
+        return res.send({ message: 'User created successfully', data: user });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: 'Error creating user' });
+    }
+}
+
 
 const getUsers = async (__req, res) => {
     try {
@@ -95,5 +120,6 @@ module.exports = {
     getUserById,
     create,
     update,
+    register,
     deleteUser
 };
