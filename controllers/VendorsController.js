@@ -43,38 +43,41 @@ const update = async (req, res) => {
     try {
         const { vendorId } = req.params;
 
-        const vendor = await Vendor.findOne({ where: { vendorId: vendorId } })
+        const vendorExist = await Vendor.findOne({ where: { vendorId: vendorId } })
         console.log(vendor)
 
-        if (!vendor) {
+        if (!vendorExist) {
             return res.status(404).json({ message: 'Error al encontrar el usuario' });
         }
+
+        await Vendor.update(req.body, { where: { vendorId: vendorId}});
+
         return res.send({ message: 'Usuario actualizado existosamente', data: req.body });
     } catch (error) {
         return res.status(500).send({ message: 'Error al crear el proveedor' });
     }
 }
 
-// const deleteVendor = async (req, res) => {
-//     try {
-//         const { VendorId } = req.params;
-//         const Vendor = await Vendor.findOne({ where: { VendorId: VendorId } })
+const deleteVendor = async (req, res) => {
+    try {
+        const { VendorId } = req.params;
+        const Vendor = await Vendor.findOne({ where: { VendorId: VendorId } })
 
-//         if (!Vendor) {
-//             return res.status(404).json({ message: 'Error al encontrar el usuario' });
-//         }
-//         await Vendor.destroy({where: {VendorId: VendorId}})
-//         return res.status(201).send({message: 'Usuario eliminado'})
+        if (!Vendor) {
+            return res.status(404).json({ message: 'Error al encontrar el usuario' });
+        }
+        await Vendor.destroy({where: {VendorId: VendorId}})
+        return res.status(201).send({message: 'Usuario eliminado'})
 
-//     } catch (error) {
-//         return res.status(500).send({ message: 'Error al eliminar el usuario' });
-//     }
-// }
+    } catch (error) {
+        return res.status(500).send({ message: 'Error al eliminar el usuario' });
+    }
+}
 
 module.exports = {
-    // login,
     getVendors,
     create,
     getVendorById,
-    update
+    update,
+    deleteVendor
 };

@@ -14,8 +14,8 @@ router
 router
     .route('/update/:vendorId')
     .put(vendorsController.update)
-// router
-//     .route('/delete/:userId')
-//     .delete(vendorsController.deleteUser)
+router
+    .route('/delete/:userId')
+    .delete(vendorsController.deleteVendor)
 
 module.exports = router;
